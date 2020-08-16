@@ -16,6 +16,14 @@ pub extern "C" fn _start() -> ! {
 
     blog_os::init();
 
+    let ptr = 0x2047d2 as *mut u32;
+
+    unsafe { let x = *ptr; }
+    println!("read worked");
+
+    unsafe { *ptr = 42; }
+    println!("write worked");
+
     #[cfg(test)]
     test_main();
 
