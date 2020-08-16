@@ -21,7 +21,11 @@ pub extern "C" fn _start() -> ! {
 
     println!("It did not crash!");
 
-    loop {}
+    loop {
+        use blog_os::print;
+        for _ in 0..10000 {}
+        print!("-");
+    }
 }
 
 #[cfg(not(test))]
