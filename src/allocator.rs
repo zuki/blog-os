@@ -10,6 +10,7 @@ use x86_64::{
 
 pub mod bump;
 pub mod linked_list;
+pub mod fixed_size_block;
 
 pub struct Dummy;
 
@@ -27,11 +28,14 @@ unsafe impl GlobalAlloc for Dummy {
 }
 
 //use bump::BumpAllocator;
-use linked_list::LinkedListAllocator;
+//use linked_list::LinkedListAllocator;
+use fixed_size_block::FixedSizeBlockAllocator;
 
 #[global_allocator]
-static ALLOCATOR: Locked<LinkedListAllocator> =
-    Locked::new(LinkedListAllocator::new());
+static ALLOCATOR: Locked<FixedSizeBlockAllocator> =
+    Locked::new(FixedSizeBlockAllocator::new());
+//static ALLOCATOR: Locked<LinkedListAllocator> =
+//    Locked::new(LinkedListAllocator::new());
 //static ALLOCATOR: Locked<BumpAllocator> = Locked::new(BumpAllocator::new());
 //static ALLOCATOR: LockedHeap = LockedHeap::empty();
 
